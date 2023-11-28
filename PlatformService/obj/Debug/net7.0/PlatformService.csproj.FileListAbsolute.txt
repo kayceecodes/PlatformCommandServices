@@ -1,0 +1,5 @@
+/home/kayc/Dropbox/repos/PlatformCommandServices/PlatformService/obj/Debug/net7.0/PlatformService.GeneratedMSBuildEditorConfig.editorconfig
+/home/kayc/Dropbox/repos/PlatformCommandServices/PlatformService/obj/Debug/net7.0/PlatformService.AssemblyInfoInputs.cache
+/home/kayc/Dropbox/repos/PlatformCommandServices/PlatformService/obj/Debug/net7.0/PlatformService.AssemblyInfo.cs
+/home/kayc/Dropbox/repos/PlatformCommandServices/PlatformService/obj/Debug/net7.0/PlatformService.csproj.CoreCompileInputs.cache
+/home/kayc/Dropbox/repos/PlatformCommandServices/PlatformService/obj/Debug/net7.0/PlatformService.MvcApplicationPartsAssemblyInfo.cache
