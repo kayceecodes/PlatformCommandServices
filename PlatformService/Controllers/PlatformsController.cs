@@ -1,8 +1,7 @@
-
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PlatformService.Dtos;
-using PlatformService.Interfaces.Repositories;
+using PlatformService.Data;
 using PlatformService.Models;
 using PlatformService.SyncDataServices.Http;
 
@@ -12,15 +11,15 @@ namespace PlatformService.Controllers;
 [Route("api/[controller]")]
 public class PlatformsController : ControllerBase
 {
-    private readonly IPlatformRepository _platformRepository;
+    private readonly IPlatformRepo _platformRepository;
     private readonly IMapper _mapper;
-    private readonly ICommandDataClient _commandDataClient;
+    // private readonly ICommandDataClient _commandDataClient;
     
-    public PlatformsController(IPlatformRepository platformRepository, IMapper mapper, ICommandDataClient commandDataClient)
+    public PlatformsController(IPlatformRepo platformRepository, IMapper mapper)
     {
         _platformRepository = platformRepository;
         _mapper = mapper;
-        _commandDataClient = commandDataClient;
+   //     _commandDataClient = commandDataClient;
     }
 
     [HttpGet]
@@ -44,6 +43,7 @@ public class PlatformsController : ControllerBase
         }
         return NotFound(); 
     }
+    
     [HttpPost]
     public async Task<ActionResult<PlatformReadDto>> CreatePlatform(PlatformCreateDto platformCreateDto) 
     {
@@ -53,14 +53,14 @@ public class PlatformsController : ControllerBase
 
         var platformReadDto = _mapper.Map<PlatformReadDto>(platformModel);
 
-        try
-        {
-            await _commandDataClient.SendPlatformToCommand(platformReadDto);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
-        }
+        // try
+        // {
+        //     await _commandDataClient.SendPlatformToCommand(platformReadDto);
+        // }
+        // catch (Exception ex)
+        // {
+        //     Console.WriteLine($"--> Could not send synchronously: {ex.Message}");
+        // }
 
         return CreatedAtRoute(nameof(GetPlatformById), new { Id = platformReadDto.Id }, platformReadDto);
     }

@@ -115,3 +115,4 @@ C:/Users/justk/Dropbox/repos/CommandPlatformServices/CommandsService/obj/Debug/n
 /home/kayc/Dropbox/repos/PlatformCommandServices/CommandsService/obj/Debug/net7.0/CommandsService.pdb
 /home/kayc/Dropbox/repos/PlatformCommandServices/CommandsService/obj/Debug/net7.0/CommandsService.genruntimeconfig.cache
 /home/kayc/Dropbox/repos/PlatformCommandServices/CommandsService/obj/Debug/net7.0/ref/CommandsService.dll
+/home/kayc/Dropbox/repos/PlatformCommandServices/CommandsService/obj/Debug/net7.0/CommandsService.sourcelink.json
