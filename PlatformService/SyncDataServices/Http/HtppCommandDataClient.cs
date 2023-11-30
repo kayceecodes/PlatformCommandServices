@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace PlatformService.SyncDataServices.Http;
 
-public class HttpCommandDataClient 
+public class HttpCommandDataClient : ICommandDataClient
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;

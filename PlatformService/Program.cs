@@ -16,7 +16,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<AppDbContext>(options =>
                     options.UseInMemoryDatabase("InMemoryDb"));
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
-// builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
 Console.WriteLine($"--> Command Service Endpoint {configuration["CommandService"]}");
 
