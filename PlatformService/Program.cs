@@ -13,12 +13,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDbContext<AppDbContext>(options =>
-                    options.UseInMemoryDatabase("InMemoryDb"));
-builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+
 builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
 
 Console.WriteLine($"--> Command Service Endpoint {configuration["CommandService"]}");
+
+if (builder.Environment.IsProduction())
+{
+    builder.Services.AddDbContext<AppDbContext>(     
+        opt => opt.UseSqlServer(configuration.GetConnectionString("PlatformsConn")));
+    builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
+    Console.WriteLine("--> Using Sql Server Db");
+}
 
 var app = builder.Build();
 
@@ -27,7 +33,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    Console.WriteLine("--> Using In-Memory Db");
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+        opt.UseInMemoryDatabase("InMem"));
 }
+
+
 
 app.UseHttpsRedirection();
 
@@ -35,7 +47,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-PrepDb.PrepPopulation(app, false);
-
+// PrepDb.PrepPopulation(app, app.Environment.IsDevelopment());
 
 app.Run();
