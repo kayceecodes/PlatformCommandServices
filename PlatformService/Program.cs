@@ -25,6 +25,12 @@ if (builder.Environment.IsProduction())
     builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
     Console.WriteLine("--> Using Sql Server Db");
 }
+else
+{
+    Console.WriteLine("--> Using In-Memory Db");
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+        opt.UseInMemoryDatabase("InMem"));
+}
 
 var app = builder.Build();
 
@@ -33,12 +39,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    Console.WriteLine("--> Using In-Memory Db");
-    builder.Services.AddDbContext<AppDbContext>(opt =>
-        opt.UseInMemoryDatabase("InMem"));
 }
-
 
 
 app.UseHttpsRedirection();
@@ -47,6 +48,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// PrepDb.PrepPopulation(app, app.Environment.IsDevelopment());
+PrepDb.PrepPopulation(app, app.Environment.IsDevelopment());
 
 app.Run();
