@@ -17,18 +17,18 @@ builder.Services.AddSwaggerGen();
 
 Console.WriteLine($"--> Command Service Endpoint {configuration["CommandService"]}");
 
-// if (builder.Environment.IsProduction())
-// {
+if (builder.Environment.IsProduction())
+{
     builder.Services.AddDbContext<AppDbContext>(     
         opt => opt.UseSqlServer(configuration.GetConnectionString("PlatformsConn")));
     Console.WriteLine("--> Using Sql Server Db");
-// }
-// else
-// {
-//     Console.WriteLine("--> Using In-Memory Db");
-//     builder.Services.AddDbContext<AppDbContext>(opt =>
-//         opt.UseInMemoryDatabase("InMem"));
-// }
+}
+else
+{
+    Console.WriteLine("--> Using In-Memory Db");
+    builder.Services.AddDbContext<AppDbContext>(opt =>
+        opt.UseInMemoryDatabase("InMem"));
+}
 
 var app = builder.Build();
 
@@ -40,7 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
